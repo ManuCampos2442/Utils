@@ -1,0 +1,76 @@
+<!-- Tabla normal  -->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Código Producto</th>
+            <th>Categoría</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr *ngFor="let item of Lista_DatosDTO">
+            <td>
+                <p>{{item.codigo}}</p>
+            </td>
+            <td>
+                <p>{{item.dato2}}</p>
+            </td>
+            <!-- Enlace para ver el detalle de un dato especifico de la tabla -->
+            <td><a routerLink="/detalle-dato/{{item.codigo}}"><i class="fa-solid fa-circle-info me-2"></i>Ver
+                    detalle</a></td>
+        </tr>
+    </tbody>
+</table>
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+
+
+<!-- Tabla distribuida en diferentes paginas -->
+<!-- 
+    Metodos y atributos del typescript
+    // Paginación para productos
+        pageProductos: number = 1;
+        
+        // Cada 4 items desbloquea pagina
+        itemsPorPagina: number = 4;
+        totalDatos: number = 0;
+
+
+        totalPagesProductos(): number[] {
+             const totalPages = Math.ceil(this.totalDatos / this.itemsPorPagina);
+            return Array(totalPages).fill(0).map((x, i) => i);
+        } 
+-->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Código Producto</th>
+            <th>Categoría</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr
+            *ngFor="let item of Lista_DatosDTO | slice:(pageProductos-1) * itemsPorPagina : pageProductos * itemsPorPagina">
+            <td>
+                <p>{{item.codigo}}</p>
+            </td>
+            <td>
+                <p>{{item.dato2}}</p>
+            </td>
+            <td><a routerLink="/detalle-dato/{{item.codigo}}"><i class="fa-solid fa-circle-info me-2"></i>Ver
+                    detalle</a></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<hr>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <ng-container *ngIf="totalDatos > 0">
+            <li class="page-item" *ngFor="let i of totalPagesProductos()">
+                <a class="page-link texto-negro" (click)="pageProductos = i + 1">{{i + 1}}</a>
+            </li>
+        </ng-container>
+    </ul>
+</nav>
+<!------------------------------------------------------------------------------------------------------------------------------------------>

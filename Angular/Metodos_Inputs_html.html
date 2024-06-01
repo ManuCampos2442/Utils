@@ -1,0 +1,84 @@
+<!-------------------------- Formularios NgModel ------------------------------->
+<div class="card">
+
+    <!-- Encabezados -->
+    <div class="card-header ps-5 pt-4 pb-4">
+        <h5 class="mb-0"><i class="fa-solid fa-file-circle-plus me-2"></i>Realizar Una Compra</h5>
+    </div>
+
+    <!-- Cuerpo -->
+    <div class="card-body p-5">
+        <form #f="ngForm">
+             <!-- Contenido del Formulario -->
+        </form>
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------------->
+
+
+
+<!-------------------------- Input de Texto ------------------------------->
+<div class="mb-3 row">
+    <label class="col-sm-2 col-form-label">Titulo Texto:</label>
+    <div class="col-sm-10">
+        <input #nombreDelinput="ngModel"
+            [ngClass]="nombreDelinput.invalid && (nombreDelinput.dirty || nombreDelinput.touched) ? 'is-invalid' : ''"
+            type="text" name="correo" class="form-control" required [(ngModel)]="nombreDelinput" />
+        <!-- Usando directamente la variable correoCliente -->
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------------->
+<!------ [hidden]="tipoCliente !== 'registrado'  Si se necesita comprobacion--------------->
+<!---------------------------------------------------------------------------------------------->
+
+<!-- --> 
+
+<!-------------------------- Input de Fechas ------------------------------------------------------->
+<div class="mb-3 row">
+    <label class="col-sm-2 col-form-label">Fecha: </label>
+    <div class="col-sm-10">
+        <input type="date" name="fecha" [(ngModel)]="entidadDTO.fechaCita" class="form-control"/>
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------------->
+
+
+<!-------------------------- Input de Numeros ------------------------------------------------------->
+<div class="mb-3 row">
+    <label class="col-sm-2 col-form-label">Titulo Texto: </label>
+    <div class="col-sm-10">
+        <input #nombreEntidadDTO="ngModel"
+            [ngClass]="nombreEntidadDTO.invalid && (nombreEntidadDTO.dirty || nombreEntidadDTO.touched) ? 'is-invalid' : ''"
+            type="number" name="telefono" class="form-control" required
+            [(ngModel)]="entidadDTO.telefono" />
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------------->
+
+
+<!-------------------------------------------------Combobox ------------------------------------>
+<div class="mb-3 row">
+    <label class="col-sm-2 col-form-label">Combobox: </label>
+    <div class="col-sm-10">                           <!-- Asigna valor al atributo del DTO --> 
+        <select name="nombre del combobox" required class="form-select"  [(ngModel)]="entidadDTO.tipo"
+            (change)="Metodo_Que_Carga_Datos_En_Combobox($event)">
+            <option value="" selected>Texto Que Va en el Combobox</option>
+            <option [value]="item" *ngFor="let item of Lista_Datos; index as i">{{item}}</option>
+        </select>
+    </div>
+</div>
+
+              <!-- Por si se necesita hacer una comprobacion Ej: si es alcohol entonces --> 
+<div class="mb-3 row" *ngIf="entidadDTO.categoria === 'ALCOHOL'">
+    <label class="col-sm-2 col-form-label">Combobox:</label>
+    <div class="col-sm-10">                   <!-- El valor del Combobox se asigna al "VariableDeAsignacion" --> 
+        <select name="nombre del combobox" required class="form-select" [(ngModel)]="VariableDeAsignacion">
+            <option value="" selected>Texto Que Va en el Combobox</option>
+            <option [value]="item" *ngFor="let item of Lista_Datos; index as i">{{item}}</option>
+        </select>
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------------->
+
+
+
